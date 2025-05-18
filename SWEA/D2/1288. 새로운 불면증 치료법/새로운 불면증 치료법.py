@@ -3,7 +3,7 @@ for tc in range(1, T+1):
     N = int(input())
     set_list = set()
     i = 1
-    t = N
+    t = 0
     while len(set_list) != 10:
         t= str(i*N)
         for j in t:
