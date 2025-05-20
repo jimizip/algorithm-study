@@ -7,11 +7,9 @@ for _ in range(1, 11):
         row = max(row, sum(num[i]))
     
     col = 0
+    new_num = list(map(list, zip(*num)))
     for i in range(100):
-        tmp = 0
-        for j in range(100):
-            tmp += num[j][i]
-        col = max(col, tmp)
+        col = max(col, sum(new_num[i]))
     
     cross_front = 0
     for i in range(100):
