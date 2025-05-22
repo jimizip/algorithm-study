@@ -1,26 +1,13 @@
 for tc in range(1, 11):
-    N, num = input().split()
-    arr = []
-    tmp = []
-    for i in num:
-        arr.append(i)
+    N, num_str = input().split()
+    stack = []
     
-    while True:
-        a = len(arr)
-        while len(arr) != 0:
-            if len(arr) == 1:
-                tmp.append(arr.pop(0))
-                break
-            if arr[0] != arr[1]:
-                tmp.append(arr.pop(0))
-            else:
-                arr.pop(0)
-                arr.pop(0)
-        
-        if len(tmp) == a:
-            break
+    for i in num_str:
+        # 스택이 비어있거나, 현재 문자가 스택의 마지막막과 다르면 push
+        if not stack or stack[-1] != i:
+            stack.append(i)
+        # 스택의 top과 현재 문자가 같으면 (중복 쌍) pop
         else:
-            arr = tmp
-            tmp = []
+            stack.pop()
     
-    print(f'#{tc} {"".join(tmp)}')
+    print(f'#{tc} {"".join(stack)}')
