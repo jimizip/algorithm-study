@@ -15,7 +15,6 @@ def div(s, l, n):
         return
     
     cnt[tmp] += 1
-    return
     
 
 N = int(input())
