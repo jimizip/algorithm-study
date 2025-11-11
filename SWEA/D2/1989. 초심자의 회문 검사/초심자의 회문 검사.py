@@ -1,7 +1,11 @@
 T = int(input())
-for tc in range(1, 1+T):
-    text = input()
-    if text == text[::-1]:
-        print(f'#{tc} {1}')
+for t in range(1, T+1):
+    word = input()
+    reverse_word = ''
+    for i in range(len(word)-1, -1, -1):
+        reverse_word += word[i]
+
+    if word == reverse_word:
+        print(f'#{t} {1}')
     else:
-        print(f'#{tc} {0}')
+        print(f'#{t} {0}')
