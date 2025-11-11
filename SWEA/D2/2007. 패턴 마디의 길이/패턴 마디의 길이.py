@@ -1,15 +1,17 @@
 T = int(input())
-for tc in range(1, T+1):
-    lis = input()
+for t in range(1, T+1):
+    word = input()
+    first = word[0]
+    word = word.replace(first, '-')
     result = 0
-    tmp1 = []
-    tmp2 = []
+    cnt = 1
 
-    for i in range(1, 11):
-        tmp1 = lis[:i]
-        tmp2 = lis[i:i*2]
-        if tmp1 == tmp2:
-            result = len(tmp1)
+    while True:
+        tmp = word.index('-', cnt)
+        if word[:tmp] == word[tmp:tmp+tmp]:
+            result = tmp
             break
-    
-    print(f'#{tc} {result}')
+        else:
+            cnt += tmp
+
+    print(f'#{t} {result}')
