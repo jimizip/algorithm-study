@@ -18,5 +18,6 @@ for tc in range(1, T + 1):
         if i in cnt:
             if cnt[i] >= max_cnt and i >= max_num:
                 max_num = i
+                break
 
     print(f"#{tc} {max_num} {max_cnt}")
