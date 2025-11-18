@@ -1,13 +1,12 @@
 T = int(input())
-for tc in range(1, T+1):
+for t in range(1, T+1):
     N = int(input())
-    price = [50000, 10000, 5000, 1000, 500, 100, 50, 10]
-    result = [0]*(len(price))
+    arr = [50000, 10000, 5000, 1000, 500, 100, 50, 10]
+    res = []
 
-    for i in range(len(price)):
-        if N // price[i] != 0:
-            result[i] = N // price[i]
-            N %= price[i]
+    for i in arr:
+        res.append(N//i)
+        N = N % i
 
-    print(f'#{tc}')
-    print(' '.join(map(str, result)))
+    print(f'#{t}')
+    print(*res)
