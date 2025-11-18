@@ -1,32 +1,21 @@
 T = int(input())
-for t in range(1, T+1):
-    N = int(input())
-    result = []
-    two = 0
-    three = 0
-    five = 0
-    seven = 0
-    eleven = 0
-
-    while N % 2 == 0:
-        N /= 2
-        two += 1
-    result.append(two)
-    while N % 3 == 0:
-        N /= 3
-        three += 1
-    result.append(three)
-    while N % 5 == 0:
-        N /= 5
-        five += 1
-    result.append(five)
-    while N % 7 == 0:
-        N /= 7
-        seven += 1
-    result.append(seven)
-    while N % 11 == 0:
-        N /= 11
-        eleven += 1
-    result.append(eleven)
-
-    print(f'#{t}', *result)
+for tc in range(1, T+1):
+    n = int(input())
+    
+    # 각 소인수(2, 3, 5, 7, 11)의 지수를 저장할 리스트
+    exp = []
+    
+    # 소인수 리스트
+    primes = [2, 3, 5, 7, 11]
+    
+    # 각 소수로 나누어떨어지는 횟수 카운트
+    for p in primes:
+        cnt = 0
+        while n % p == 0:  # n이 p로 나누어떨어지는 동안
+            n //= p  # 몫 연산자(//): 나눈 후 정수 부분만 취함
+            cnt += 1  # 지수 증가
+        exp.append(cnt)
+    
+    # 결과 출력 (리스트를 공백으로 구분하여 출력)
+    # *exp: 언패킹 연산자, [1,2,3] -> 1 2 3으로 변환
+    print(f"#{tc}", *exp)
