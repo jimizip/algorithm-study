@@ -1,12 +1,13 @@
 T = int(input())
-for tc in range(1, 1+T):
-    N = int(input())
-    result = ''
+for tc in range(1, T + 1):
     print(f'#{tc}')
-    for i in range(N):
-        C, K = input().split()
-        result += (C*int(K))
-    
-    for i in range(len(result)//10+1):
-        print(result[:10])
-        result = result[10:]
+    N = int(input())
+    res = ''
+    for _ in range(N):
+        word, idx = input().split()
+        for _ in range(int(idx)):
+            res += word
+            if len(res) == 10:
+                print(res)
+                res = ''
+    print(res)
