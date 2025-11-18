@@ -1,11 +1,12 @@
 T = int(input())
-for tc in range(1, 1+T):
-    arr = list(map(int, input().split()))
-    days = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    result = (arr[3] - arr[1]) + 1
-
-    if arr[2] - arr[0] != 0:
-        for i in range(arr[0], arr[2]):
-            result += days[i]
-    
-    print(f'#{tc} {result}')
+arr = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+for tc in range(1, T + 1):
+    fm, fd, lm, ld = map(int, input().split())
+    res = 0
+    if fm == lm:
+        res = (ld-fd)+1
+    else:
+        for i in range(fm, lm):
+            res += arr[i-1]
+        res += (ld-fd)+1
+    print(f'#{tc} {res}')
