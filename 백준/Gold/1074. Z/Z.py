@@ -1,22 +1,38 @@
 N, r, c = map(int, input().split())
 
-result = 0
+def sol(N, r, c):
 
-while N != 0:
-    N -= 1
-    half = 2 ** N
+    if N == 0:
+        # 1x1 배열의 유일한 칸 (0, 0)의 방문 순서는 항상 0
+        return 0
 
-    if r < half and c < half:
-        result += half * half * 0
-    elif r < half and c >= half:
-        result += half * half * 1
-        c -= half
-    elif r >= half and c < half:
-        result += half * half * 2
-        r -= half
-    else:
-        result += half * half * 3
-        r -= half
-        c -= half
+    # 4. 재귀 단계 (Recursive Step): 분할 정복
+    # 현재 (N, r, c)의 방문 순서는 다음 두 부분의 합으로 구성됨:
+    #   a) 현재 위치(r,c)가 속한 2x2 블록 내에서의 상대적 순서 (0, 1, 2, 3 중 하나)
+    #   b) 현재 2x2 블록 이전에 방문한 모든 셀의 개수 (4 * 더 작은 문제의 결과)
 
-print(result)
+    # 4-1. 현재 위치 (r, c)가 속한 2x2 블록 내에서의 상대적 Z-순서 계산
+    # (r%2, c%2) 는 현재 위치가 속한 2x2 블록 내에서의 로컬 좌표 (0,0), (0,1), (1,0), (1,1)를 나타냄
+    # Z 순서: (0,0)->0, (0,1)->1, (1,0)->2, (1,1)->3
+    # 이 순서를 계산하는 공식이 2 * (r % 2) + (c % 2) 임
+    local_order = 2 * (r % 2) + (c % 2)
+    # 예: r=3, c=1 이면 r%2=1, c%2=1 -> local_order = 2*1 + 1 = 3
+
+    # 4-2. 현재 2x2 블록 이전에 방문한 셀 개수 계산
+    # sol(N-1, int(r/2), int(c/2)) :
+    #   - 문제를 한 단계 작은 크기(N-1)로 줄여서 재귀 호출
+    #   - int(r/2), int(c/2) : 현재 위치 (r,c)가 속한 2x2 블록이,
+    #                         한 단계 작은 (N-1) 크기의 그리드에서는 어떤 좌표에 해당하는지를 계산
+    #                         (예: 4x4의 (3,1)은 2x2 그리드의 (1,0)에 해당)
+    #   - 이 재귀 호출의 결과는, 현재 2x2 블록이 몇 번째 블록으로 방문되는지 (0부터 시작) 알려줌
+    # 4 * sol(...) :
+    #   - 한 단계 작은 그리드에서의 한 칸은 현재 그리드에서 2x2=4칸에 해당함
+    #   - 따라서 이전 블록들까지 방문한 총 셀의 개수는 (이전 블록 수 * 4)가 됨
+    previous_cells_count = 4 * sol(N - 1, int(r / 2), int(c / 2))
+
+    # 4-3. 최종 결과 반환
+    # 이전 블록들까지 방문한 셀 개수 + 현재 블록 내에서의 순서
+    return local_order + previous_cells_count
+
+# 5. 함수 호출 및 결과 출력
+print(sol(N, r, c))
